@@ -1,12 +1,13 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import relationship
 
 from .database import Base
 
 
-class Item(Base):
-    __tablename__ = "items"
+class Prediction(Base):
+    __tablename__ = "predictions"
 
     id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
-    description = Column(String, index=True)
+    observation = Column(String, index=True)
+    proba = Column(Float, index=True)
+    true_class = Column(Integer, index=True)

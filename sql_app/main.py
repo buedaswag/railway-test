@@ -20,14 +20,19 @@ def get_db():
         db.close()
 
 
-@app.post("/items/", response_model=schemas.Item)
-def create_item_for_user(
-    item: schemas.ItemCreate, db: Session = Depends(get_db)
+@app.post("/predict/", response_model=schemas.Prediction)
+def predict(
+    prediction: schemas.Prediction, db: Session = Depends(get_db)
 ):
-    return crud.create_item(db=db, item=item)
+    return crud.create_prediction(db=db, prediction=prediction)
 
+@app.post('/update', response_model=schemas.Prediction)
+def update(
+    update: schemas.Update, db: Session = Depends(get_db)
+):
+    return crud.update_prediction(db=db, update=update)
 
-@app.get("/items/", response_model=List[schemas.Item])
-def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    items = crud.get_items(db, skip=skip, limit=limit)
-    return items
+@app.get("/list-predictions/", response_model=List[schemas.Prediction])
+def list_predictions(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    predictions = crud.get_predictions(db, skip=skip, limit=limit)
+    return predictions

@@ -3,17 +3,13 @@ from typing import List, Union
 from pydantic import BaseModel
 
 
-class ItemBase(BaseModel):
-    title: str
-    description: Union[str, None] = None
-
-
-class ItemCreate(ItemBase):
-    pass
-
-
-class Item(ItemBase):
+class Prediction(BaseModel):
     id: int
+    observation: str
 
     class Config:
         orm_mode = True
+
+class Update(BaseModel):
+    id: int
+    true_class: Union[int, None]
