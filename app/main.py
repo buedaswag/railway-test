@@ -7,15 +7,11 @@ from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.declarative import declarative_base
+
 #
 # db connection
 #
-print(dict(os.environ).keys())
-DATABASE_URL = os.environ['DATABASE_URL']
-
-engine = create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}
-)
+engine = create_engine(os.environ['DATABASE_URL'])
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
