@@ -10,6 +10,7 @@ from sqlalchemy.ext.declarative import declarative_base
 #
 # db connection
 #
+print(dict(os.environ).keys())
 DATABASE_URL = os.environ['DATABASE_URL']
 
 engine = create_engine(
